@@ -1,5 +1,12 @@
 require "nvchad.autocmds"
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*/templates/*.yaml", "*/templates/*.yml" },
+  callback = function()
+    vim.bo.filetype = "helm"
+  end,
+})
+
 vim.api.nvim_create_user_command("Rename", function(args)
   local old = vim.api.nvim_buf_get_name(0)
   local new = vim.fn.fnamemodify(old, ":h") .. "/" .. args.args

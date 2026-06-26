@@ -108,6 +108,7 @@ return {
         "hcl",
         "yaml",
         "helm",
+        "gotmpl",
         "python",
       },
     },
