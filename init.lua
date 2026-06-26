@@ -25,9 +25,9 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
--- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
+-- load theme (cache won't exist on first run before plugins install)
+pcall(dofile, vim.g.base46_cache .. "defaults")
+pcall(dofile, vim.g.base46_cache .. "statusline")
 
 require "options"
 require "autocmds"
