@@ -36,6 +36,12 @@ return {
       filters = {
         git_ignored = false,
       },
+      on_attach = function(bufnr)
+        local api = require "nvim-tree.api"
+        api.config.mappings.default_on_attach(bufnr)
+        vim.keymap.del("n", "f", { buffer = bufnr })
+        vim.keymap.set("n", "<leader>fi", api.live_filter.start, { buffer = bufnr, desc = "Live filter" })
+      end,
     },
   },
 
