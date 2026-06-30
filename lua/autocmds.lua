@@ -1,5 +1,13 @@
 require "nvchad.autocmds"
 
+vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#cc0000" })
+vim.api.nvim_set_hl(0, "DapStopped", { fg = "#ffcc00" })
+vim.fn.sign_define("DapBreakpoint",          { text = "●", texthl = "DapBreakpoint" })
+vim.fn.sign_define("DapBreakpointCondition", { text = "◆", texthl = "DapBreakpoint" })
+vim.fn.sign_define("DapBreakpointRejected",  { text = "○", texthl = "DapBreakpoint" })
+vim.fn.sign_define("DapStopped",             { text = "▶", texthl = "DapStopped" })
+vim.fn.sign_define("DapLogPoint",            { text = "◉", texthl = "DapBreakpoint" })
+
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*/templates/*.yaml", "*/templates/*.yml" },
   callback = function()
