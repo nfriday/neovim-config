@@ -168,6 +168,15 @@ dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() 
 
   { "github/copilot.vim", lazy = false },
 
+  {
+    "mg979/vim-visual-multi",
+    branch = "master",
+    lazy = false,
+    init = function()
+      vim.g.VM_maps = { ["I BS"] = "" }
+    end,
+  },
+
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 }
