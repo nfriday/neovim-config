@@ -6,6 +6,8 @@ require "nvchad.options"
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
 vim.opt.relativenumber = true
+vim.opt.scrolloff = 5
+vim.opt.clipboard = "unnamedplus"
 
 vim.g.clipboard = {
   name = "OSC 52",

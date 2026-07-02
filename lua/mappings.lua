@@ -4,7 +4,6 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("i", "<S-Tab>", "<C-d>", { desc = "De-indent" })
 map("v", "<", "<gv", { desc = "De-indent and reselect" })
@@ -13,6 +12,13 @@ map("v", ">", ">gv", { desc = "Indent and reselect" })
 -- scratch buffers
 map("n", "<leader>s", "<cmd>Scratch<cr>", { desc = "New scratch buffer" })
 map("n", "<leader>so", "<cmd>ScratchOpen<cr>", { desc = "Open scratch buffer" })
+
+-- treesitter context
+map("n", "<leader>tc", function() require("treesitter-context").toggle() end, { desc = "Toggle treesitter context" })
+
+-- yaml
+map("n", "<leader>yk", "<cmd>YAMLYankKey +<cr>", { desc = "Yank YAML key path" })
+map("n", "<leader>yf", "<cmd>YAMLTelescope<cr>", { desc = "Find YAML key (telescope)" })
 
 -- telescope pickers
 map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Find keymaps" })

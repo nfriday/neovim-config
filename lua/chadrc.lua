@@ -12,6 +12,12 @@ M.base46 = {
 	-- 	Comment = { italic = true },
 	-- 	["@comment"] = { italic = true },
 	-- },
+
+	hl_add = {
+		TreesitterContext = { bg = "one_bg2" },
+		TreesitterContextLineNumber = { fg = "yellow", bg = "one_bg2" },
+		TreesitterContextBottom = { underline = true, sp = "grey" },
+	},
 }
 
 -- M.nvdash = { load_on_startup = true }

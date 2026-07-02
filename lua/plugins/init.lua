@@ -172,6 +172,24 @@ dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() 
     end,
   },
 
+  {
+    url = "https://tangled.org/cuducos.me/yaml.nvim",
+    ft = "yaml",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {
+      max_lines = 4,
+    },
+  },
+
   { "github/copilot.vim", lazy = false },
 
   {
