@@ -190,7 +190,32 @@ dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() 
     },
   },
 
-  { "github/copilot.vim", lazy = false },
+  {
+    "github/copilot.vim",
+    lazy = false,
+    init = function()
+      vim.g.copilot_no_tab_map = true
+    end,
+  },
+
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      local cmp = require "cmp"
+      opts.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
+        local copilot_keys = vim.fn["copilot#Accept"] ""
+        if copilot_keys ~= "" then
+          vim.api.nvim_feedkeys(copilot_keys, "i", true)
+        elseif cmp.visible() then
+          cmp.select_prev_item()
+        elseif require("luasnip").jumpable(-1) then
+          require("luasnip").jump(-1)
+        else
+          fallback()
+        end
+      end, { "i", "s" })
+    end,
+  },
 
   {
     "mg979/vim-visual-multi",
