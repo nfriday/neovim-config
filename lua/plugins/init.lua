@@ -12,6 +12,16 @@ return {
     opts = {
       defaults = {
         file_ignore_patterns = { "^%.git/" },
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
+        },
       },
       pickers = {
         find_files = {
