@@ -19,6 +19,18 @@ map("n", "<leader>tc", function() require("treesitter-context").toggle() end, { 
 map("n", "<leader>yk", "<cmd>YAMLYankKey +<cr>", { desc = "Yank YAML key path" })
 map("n", "<leader>yf", "<cmd>YAMLTelescope<cr>", { desc = "Find YAML key (telescope)" })
 
+-- diagnostics
+map("n", "<leader>er", function()
+  local bufnr, winnr = vim.diagnostic.open_float()
+  if winnr then
+    vim.api.nvim_set_current_win(winnr)
+    vim.keymap.set("n", "<Esc>", function()
+      vim.api.nvim_win_close(winnr, true)
+    end, { buffer = bufnr, nowait = true })
+  end
+end, { desc = "Show diagnostic float" })
+map("n", "<leader>ex", "<cmd>NvimTreeFocus<cr>", { desc = "NvimTree focus window" })
+
 -- telescope pickers
 map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Find keymaps" })
 map("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Find commands" })
