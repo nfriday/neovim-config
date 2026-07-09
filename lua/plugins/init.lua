@@ -205,6 +205,7 @@ dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() 
     lazy = false,
     init = function()
       vim.g.copilot_no_tab_map = true
+      vim.g.copilot_browser = { "echo" }
     end,
   },
 
