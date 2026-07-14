@@ -122,11 +122,8 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "vim",
-        "lua",
-        "vimdoc",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, {
         "html",
         "css",
         "java",
@@ -136,8 +133,8 @@ return {
         "helm",
         "gotmpl",
         "python",
-      },
-    },
+      })
+    end,
   },
 
   {
