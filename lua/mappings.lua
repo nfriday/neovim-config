@@ -5,6 +5,7 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 map("i", "jk", "<ESC>")
+map("n", "<leader>p", '"0p', { desc = "Paste from register 0" })
 map("v", "<", "<gv", { desc = "De-indent and reselect" })
 map("v", ">", ">gv", { desc = "Indent and reselect" })
 
