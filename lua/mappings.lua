@@ -44,8 +44,8 @@ map("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Find commands" }
 -- open current file/line on GitHub (visual: selected range)
 -- <leader>go is mapped by gitlinker.nvim setup in plugins/init.lua
 map({ "n", "t" }, "<C-`>", function()
-  require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
-end, { desc = "terminal toggleable horizontal term" })
+  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+end, { desc = "terminal toggleable floating term" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 

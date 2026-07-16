@@ -20,6 +20,15 @@ M.base46 = {
 	},
 }
 
+M.term = {
+  float = {
+    width = 0.75,
+    height = 0.65,
+    row = 0.15,
+    col = 0.125,
+  },
+}
+
 -- M.nvdash = { load_on_startup = true }
 -- M.ui = {
 --       tabufline = {

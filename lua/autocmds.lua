@@ -1,5 +1,15 @@
 require "nvchad.autocmds"
 
+vim.api.nvim_create_autocmd("TermClose", {
+  callback = function()
+    local win = vim.api.nvim_get_current_win()
+    local config = vim.api.nvim_win_get_config(win)
+    if config.relative ~= "" then
+      vim.api.nvim_win_close(win, true)
+    end
+  end,
+})
+
 vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#cc0000" })
 vim.api.nvim_set_hl(0, "DapStopped", { fg = "#ffcc00" })
 vim.fn.sign_define("DapBreakpoint",          { text = "●", texthl = "DapBreakpoint" })
