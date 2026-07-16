@@ -5,7 +5,10 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 map("i", "jk", "<ESC>")
-map("n", "<leader>p", '"+p', { desc = "Paste from OSC52 clipboard" })
+map({ "n", "v" }, "y", '"+y', { desc = "Yank to system clipboard" })
+map("n", "Y", '"+Y', { desc = "Yank line to system clipboard" })
+map("n", "p", '"+p', { desc = "Paste from system clipboard" })
+map("n", "<leader>p", '""p', { desc = "Paste from unnamed register" })
 map("v", "<", "<gv", { desc = "De-indent and reselect" })
 map("v", ">", ">gv", { desc = "Indent and reselect" })
 
