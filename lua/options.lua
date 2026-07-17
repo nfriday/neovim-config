@@ -7,7 +7,7 @@ require "nvchad.options"
 
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 5
-vim.opt.clipboard = ""
+vim.opt.clipboard = "unnamedplus"
 
 vim.g.clipboard = {
   name = "OSC 52",

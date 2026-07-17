@@ -5,12 +5,14 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 map("i", "jk", "<ESC>")
-map({ "n", "v" }, "y", '"+y', { desc = "Yank to system clipboard" })
-map("n", "Y", '"+Y', { desc = "Yank line to system clipboard" })
-map("n", "p", '"+p', { desc = "Paste from system clipboard" })
-map("n", "P", '"+P', { desc = "Paste from system clipboard (before cursor)" })
-map("n", "<leader>p", '""p', { desc = "Paste from unnamed register" })
-map("n", "<leader>P", '""P', { desc = "Paste from unnamed register (before cursor)" })
+map({ "n", "v" }, "d", '"dd', { desc = "Delete to named register" })
+map({ "n", "v" }, "D", '"dD', { desc = "Delete to end to named register" })
+map({ "n", "v" }, "c", '"dc', { desc = "Change to named register" })
+map({ "n", "v" }, "C", '"dC', { desc = "Change to end to named register" })
+map({ "n", "v" }, "x", '"dx', { desc = "Cut char to named register" })
+map({ "n", "v" }, "X", '"dX', { desc = "Cut char back to named register" })
+map("n", "<leader>p", '"dp', { desc = "Paste last delete/change" })
+map("n", "<leader>P", '"dP', { desc = "Paste last delete/change (before cursor)" })
 map("v", "<", "<gv", { desc = "De-indent and reselect" })
 map("v", ">", ">gv", { desc = "Indent and reselect" })
 
