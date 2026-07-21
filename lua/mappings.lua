@@ -53,7 +53,17 @@ end, { desc = "terminal toggleable floating term" })
 
 local function send_to_term(text)
   local toggle_term = function()
-    require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
+    require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+  end
+
+  local function do_send(chan, buf)
+    vim.fn.chansend(chan, text .. '\n')
+    vim.defer_fn(function()
+      local last_line = vim.api.nvim_buf_line_count(buf)
+      for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+        vim.api.nvim_win_set_cursor(win, { last_line, 0 })
+      end
+    end, 50)
   end
 
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -61,14 +71,13 @@ local function send_to_term(text)
       local chan = vim.bo[buf].channel
       if chan > 0 then
         local wins = vim.fn.win_findbuf(buf)
-        if #wins == 0 then toggle_term() end
-        vim.fn.chansend(chan, text .. '\n')
-        vim.defer_fn(function()
-          local last_line = vim.api.nvim_buf_line_count(buf)
-          for _, win in ipairs(vim.fn.win_findbuf(buf)) do
-            vim.api.nvim_win_set_cursor(win, { last_line, 0 })
-          end
-        end, 50)
+        if #wins == 0 then
+          -- defer send until the float has finished opening
+          toggle_term()
+          vim.defer_fn(function() do_send(chan, buf) end, 100)
+        else
+          do_send(chan, buf)
+        end
         return
       end
     end
@@ -88,5 +97,5 @@ map('v', '<F8>', function()
   vim.cmd('noau normal! gv"zy')
   local text = vim.fn.getreg('z')
   vim.fn.setreg('z', saved, savedtype)
-  send_to_term(text)
+  send_to_term((text:gsub('\n+$', '')))
 end, { desc = 'Send selection to terminal' })
