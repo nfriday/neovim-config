@@ -22,11 +22,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*/templates/*.yaml", "*/templates/*.yml" },
   callback = function()
     vim.bo.filetype = "helm"
-    for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-      if client.name == "yamlls" then
-        vim.lsp.stop_client(client.id)
-      end
-    end
   end,
 })
 

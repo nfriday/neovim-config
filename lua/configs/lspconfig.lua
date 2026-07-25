@@ -13,4 +13,14 @@ vim.lsp.config("jdtls", {
 })
 vim.lsp.enable("jdtls")
 
+vim.lsp.config("helm_ls", {
+  settings = {
+    ["helm-ls"] = {
+      yamlls = {
+        enabled = false,
+      },
+    },
+  },
+})
+
 -- read :h vim.lsp.config for changing options of lsp servers
