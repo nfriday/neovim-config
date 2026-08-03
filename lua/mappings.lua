@@ -69,7 +69,7 @@ local function send_to_term(text)
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if vim.bo[buf].buftype == 'terminal' then
       local chan = vim.bo[buf].channel
-      if chan > 0 then
+      if chan > 0 and vim.fn.jobwait({chan}, 0)[1] == -1 then
         local wins = vim.fn.win_findbuf(buf)
         if #wins == 0 then
           -- defer send until the float has finished opening
@@ -92,10 +92,8 @@ map('n', '<F8>', function()
 end, { desc = 'Send line to terminal' })
 
 map('v', '<F8>', function()
-  local saved = vim.fn.getreg('z')
-  local savedtype = vim.fn.getregtype('z')
-  vim.cmd('noau normal! gv"zy')
-  local text = vim.fn.getreg('z')
-  vim.fn.setreg('z', saved, savedtype)
-  send_to_term((text:gsub('\n+$', '')))
+  local s = math.min(vim.fn.line("v"), vim.fn.line("."))
+  local e = math.max(vim.fn.line("v"), vim.fn.line("."))
+  local lines = vim.api.nvim_buf_get_lines(0, s - 1, e, false)
+  send_to_term(table.concat(lines, "\n"))
 end, { desc = 'Send selection to terminal' })
